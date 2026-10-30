@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="The Chanderi Night Gazette: a fictional sighting-alert portal for Stree, the vengeful spirit of Chanderi. In alliance with Kapidhwaj.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🕯️</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Chanderi Night Gazette – O Stree, Kal Aana</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Playfair+Display:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+<div class="frame"><div class="inner">
+
+<header>
+  <div class="sub">Est. under the Bundela Kings · Published for the Residents of Chanderi</div>
+  <div class="orn">✦ ✦ ✦</div>
+  <h1>The Chanderi Night Gazette</h1>
+  <p class="chant">“O Stree, Kal Aana.”</p>
+  <div style="margin:10px 0 4px"><button class="chip" id="snd" type="button" aria-pressed="true">🔔 Séance Sound: On</button></div>
+  <div class="sub" style="margin-top:6px">Writ upon every door, lest She call a name in the dark</div>
+  <div class="orn">❧ ✠ ❧</div>
+</header>
+
+<section class="grid3" aria-label="Town status">
+  <div class="card"><div class="n" id="cTotal">0</div><div class="l">Entries Logged</div></div>
+  <div class="card"><div class="n" id="cMissing" style="color:var(--blood)">0</div><div class="l">Persons Missing</div></div>
+  <div class="card"><div class="l">Tonight’s Peril</div><div class="level" id="level">—</div></div>
+</section>
+
+<div class="orn">✦ THE SIGHTING MAP ✦</div>
+
+<section class="main">
+  <div class="box">
+    <h2>Chart of the Town</h2>
+    <div class="filters" id="filters" role="group" aria-label="Filter incidents">
+      <button class="chip" data-f="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="Sighting" aria-pressed="false">Sightings</button>
+      <button class="chip" data-f="Disappearance" aria-pressed="false">Disappearances</button>
+      <button class="chip" data-f="Warning" aria-pressed="false">Warnings</button>
+    </div>
+    <svg class="map" id="map" viewBox="0 0 600 420" role="img" aria-label="Map of Chanderi with incident pins">
+      <defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#3a2a22" stroke-width="1"/></pattern></defs>
+      <rect x="8" y="8" width="584" height="404" fill="none" stroke="#c9a24b" stroke-width="1"/>
+      <rect x="14" y="14" width="572" height="392" fill="none" stroke="#c9a24b" stroke-width="3" stroke-dasharray="1 5"/>
+      <path d="M200 130 Q300 30 410 120 L420 160 Q300 120 205 165Z" fill="url(#hatch)" stroke="#6b5530"/>
+      <path d="M40 300 Q120 250 200 300 T360 390 L40 395Z" fill="url(#hatch)" stroke="#6b5530"/>
+      <g fill="none" stroke="#8a7447" stroke-width="2" stroke-dasharray="7 5">
+        <path d="M300 95 L300 240 L250 340"/><path d="M180 170 L300 240 L460 150"/><path d="M300 240 L440 320"/><path d="M110 310 L250 340 L440 320"/>
+      </g>
+      <g fill="#c9a24b" font-family="IM Fell English,Georgia,serif" font-size="12" id="labels"></g>
+      <g transform="translate(535 365)" stroke="#c9a24b" fill="none"><circle r="26"/><circle r="20" stroke-dasharray="2 3"/><path d="M0-30L5 0 0 30-5 0Z" fill="#a3202c"/><path d="M-30 0L0-5 30 0 0 5Z"/><text x="-4" y="-34" fill="#c9a24b" stroke="none" font-size="13" font-family="Playfair Display,serif">N</text></g>
+      <g id="wards"></g>
+      <g id="pins"></g>
+    </svg>
+    <div class="legend"><span>● Sighting</span><span style="color:var(--blood)">✖ Disappearance</span><span style="color:var(--amber)">▲ Warning</span></div>
+    <div class="detail" id="detail">Select a pin upon the chart to read its entry.</div>
+  </div>
+
+  <div class="box">
+    <h2>Chronicle of Events</h2>
+    <ol class="tl" id="timeline"></ol>
+  </div>
+</section>
+
+<div class="orn" style="margin-top:30px">✦ REPORT A VISITATION ✦</div>
+<section class="box" style="max-width:760px;margin:0 auto">
+  <form id="form">
+    <div><label for="fLoc">Place</label><select id="fLoc"></select></div>
+    <div><label for="fType">Nature</label><select id="fType"><option>Sighting</option><option>Disappearance</option><option>Warning</option></select></div>
+    <div class="full"><label for="fTitle">Headline</label><input id="fTitle" maxlength="60" placeholder="A woman in red at the stepwell…" required></div>
+    <div class="full"><label for="fText">Particulars</label><textarea id="fText" maxlength="240" placeholder="Hour, apparel, scent of jasmine, whom she called upon…" required></textarea></div>
+    <div class="full"><button class="go" type="submit">Post to the Gazette</button></div>
+  </form>
+  <p class="note">Entries live in this page only. This is a work of fiction.</p>
+</section>
+
+<div class="orn" style="margin-top:30px">✦ IN CASE OF NEED ✦</div>
+<section class="sos">
+  <div class="card"><h3>Mark the Door</h3><p>Write “O Stree, Kal Aana” upon your threshold. She shall turn away till the morrow. A Kapidhwaj saffron banner strengthens the mark.</p></div>
+  <div class="card"><h3>Keep to Lit Lanes</h3><p>Avoid Katti Ghati and the stepwell after dusk. Travel in company; never answer a name called from behind.</p></div>
+  <div class="card"><h3>Emergency · 112</h3><p>For genuine danger, dial 112, India’s national emergency number.</p></div>
+</section>
+
+<div class="orn" style="margin-top:30px">✦ THE ALLIANCE ✦</div>
+<section class="box alliance" id="alliance" aria-labelledby="allyH">
+  <h2 id="allyH">The Kapidhwaj Wardens</h2>
+  <div class="ally-grid">
+    <div class="banner-wrap" aria-hidden="true">
+      <svg viewBox="0 0 120 220" width="120" height="220">
+        <rect x="14" y="8" width="5" height="206" fill="#c9a24b"/><circle cx="16.5" cy="8" r="6" fill="#c9a24b"/>
+        <path id="flag" d="M19 20 L108 38 L19 92Z" fill="#d98a2b" stroke="#c9a24b" stroke-width="2"/>
+        <path d="M44 44 L44 78 M36 50 h16 M44 78 l-5 8 h10z" stroke="#120d0f" stroke-width="3" fill="#120d0f" stroke-linecap="round"/>
+        <path d="M6 214h22" stroke="#c9a24b" stroke-width="4"/>
+      </svg>
+    </div>
+    <div>
+      <p class="lore">Long before the Gazette was printed, a guild of banner-bearers kept watch over Chanderi’s gates. Their saffron <i>kapidhwaj</i> pennant is hung where the walls are thin, and tradition holds that Stree will not cross beneath it. The Wardens still supply the town with ward-cloth, lantern oil, and the knowledge of which doors to mark.</p>
+      <p class="lore">Raise their banner to see wards bloom over every haunt on the chart, and watch tonight’s peril fall.</p>
+      <button class="go" id="raise" type="button" aria-pressed="false">Raise the Banner</button>
+    </div>
+    <a class="calling-card" href="https://www.instagram.com/kapidhwaj.innovations/" target="_blank" rel="noopener noreferrer">
+      <div class="sub">By Telegraph · Calling Card</div>
+      <div class="orn" style="margin:4px 0">❦</div>
+      <div class="handle">@kapidhwaj.innovations</div>
+      <div class="cta">Read the Wardens’ dispatches on Instagram ↗</div>
+    </a>
+  </div>
+</section>
+
+<footer><div class="orn">❦</div>The Chanderi Night Gazette · A fictional alert portal inspired by the legend of Stree<br>Warded in alliance with <a href="https://www.instagram.com/kapidhwaj.innovations/" target="_blank" rel="noopener noreferrer">Kapidhwaj ↗</a></footer>
+</div></div>
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
